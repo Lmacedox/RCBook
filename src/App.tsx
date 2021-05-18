@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Header } from './components/Header';
-import { SearchBook } from './components/SearchBook';
+import { MainContent } from './components/MainBoard';
 import { GlobalStyle } from './global';
 
 
@@ -9,7 +9,7 @@ export function App() {
   return (
     <>
       <Header />
-      <SearchBook />
+      <MainContent />
       <GlobalStyle />
     </>
   );

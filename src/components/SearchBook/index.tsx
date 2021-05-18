@@ -1,9 +1,17 @@
+import { FaSearch } from 'react-icons/fa';
 import { Container } from "./styles";
 
-export function SearchBook(){
-  return(
-  <Container>
-    <h2>ds</h2>
-  </Container>
-  )
+export function SearchData() {
+  return (
+    <Container>
+      <div>
+        <input
+          placeholder="Titulo"
+        />
+        <button>
+          <FaSearch className="iconContent" />
+        </button>
+      </div>
+    </Container>
+  );
 }
