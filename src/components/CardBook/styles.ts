@@ -90,3 +90,29 @@ export const ContentCard = styled.ul`
 
   }
 `;
+
+
+export const ContentModal = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 0.5rem;
+  margin-top: 4rem;
+
+  .ContentInitial{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+
+    img{
+      width: 15rem;
+      height: 20rem;
+    }
+
+    h3{
+      margin-top: 1.5rem;
+
+    }
+
+  }
+`

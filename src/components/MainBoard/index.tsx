@@ -17,6 +17,8 @@ export function MainContent(){
       imageLinks: {
         thumbnail: string;
       },
+      language: string;
+      authors: [];
     }
   }
 
