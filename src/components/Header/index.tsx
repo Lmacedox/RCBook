@@ -1,7 +1,14 @@
+import { useState } from 'react';
 import { BiBookBookmark } from 'react-icons/bi';
 import { Container, Content } from './styles'
 
-export function Header(){
+interface HeaderProps{
+  onOpenFavoritesModal: () => void;
+}
+
+
+export function Header({onOpenFavoritesModal}: HeaderProps){
+
   return(
     <Container>
       <Content>
@@ -9,9 +16,13 @@ export function Header(){
           RCBook
           <BiBookBookmark />
         </span>
-        <button type="button">
+        <button 
+          type="button"
+          onClick={onOpenFavoritesModal}
+          >
           Favoritos
         </button>
+
       </Content>
     </Container>
   )
