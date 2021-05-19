@@ -1,57 +1,30 @@
-import { Container,ContentCard, Content } from "./styles";
-import Modal from 'react-modal'
-import { api } from '../../services/api'
-import { useState, useEffect } from 'react';
+import { Container,ContentCard } from "./styles";
 import { BiStar } from 'react-icons/bi';
 import { AiOutlineInfoCircle } from 'react-icons/ai'
-import { FaSearch } from 'react-icons/fa';
 
 
-interface CardBooksProps {
-  onOpenDescriptionModal: () => void;
-}
 
 
-interface DataInfo  {
+interface DataInfo {
   id: string;
   volumeInfo: {
     title: string,
     description: string,
     publishedDate: string,
     imageLinks: {
-      thumbnail: string;
+      thumbnail?: string;
     },
   }
 }
 
+interface CardBooksProps {
+  books: DataInfo[]
+  onOpenDescriptionModal: () => void;
+}
 
 
 
-
-export function CardBook({ onOpenDescriptionModal }: CardBooksProps) {
-  const [searchName, setSearchName] = useState('')
-  const [books, setBooks] = useState<DataInfo[]>([]);
-  const [paginationIndex, setPaginationIndex] = useState(0)
-
-// FUNCTION SEARCH BOOK
-  async function handleSearchBook(searchName:string) {
-    await api.get(`${searchName}&maxResults=9&startIndex=1&key=AIzaSyCl-sNnxcXCUfx8EsqfQEfB9w6kVYqE0ps`)
-          .then(response =>
-            setBooks(response.data.items)
-          )
-  }
-
-// FUNCTION INITIAL SEARCH
-  useEffect(() => {
-    async function loadBooks() {
-      await api.get(`${'JavaScript'}&maxResults=9&startIndex=0&key=AIzaSyCl-sNnxcXCUfx8EsqfQEfB9w6kVYqE0ps`)
-        .then(response =>
-          setBooks(response.data.items)
-        )
-    }
-    loadBooks();
-  }, []);
-
+export function CardBook({ onOpenDescriptionModal, books }: CardBooksProps) {
 // FUNCTION HANDLE MODAL
   function modalDetails(idBook:string) {
     const currentBooks = [...books]
@@ -64,19 +37,6 @@ export function CardBook({ onOpenDescriptionModal }: CardBooksProps) {
 
   return (
     <Container>
-      <Content>
-        <input
-          placeholder="DIGITE O TITULO DESEJADO"
-          value={searchName}
-          onChange={event => setSearchName(event.target.value)}
-        />
-
-        <button
-          onClick={() => handleSearchBook(searchName)}
-        >
-          <FaSearch className="iconContent" />
-        </button>
-      </Content>
       <ContentCard>
         {books.map(book => (
           <ul>
