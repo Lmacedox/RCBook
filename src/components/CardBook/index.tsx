@@ -1,10 +1,15 @@
 import { Container,ContentCard, Content } from "./styles";
+import Modal from 'react-modal'
 import { api } from '../../services/api'
 import { useState, useEffect } from 'react';
 import { BiStar } from 'react-icons/bi';
 import { AiOutlineInfoCircle } from 'react-icons/ai'
 import { FaSearch } from 'react-icons/fa';
 
+
+interface CardBooksProps {
+  onOpenDescriptionModal: () => void;
+}
 
 
 interface DataInfo  {
@@ -21,7 +26,9 @@ interface DataInfo  {
 
 
 
-export function CardBook() {
+
+
+export function CardBook({ onOpenDescriptionModal }: CardBooksProps) {
   const [searchName, setSearchName] = useState('')
   const [books, setBooks] = useState<DataInfo[]>([]);
   const [paginationIndex, setPaginationIndex] = useState(0)
@@ -45,8 +52,13 @@ export function CardBook() {
     loadBooks();
   }, []);
 
+// FUNCTION HANDLE MODAL
   function modalDetails(idBook:string) {
-    console.log(idBook)
+    const currentBooks = [...books]
+    const bookInfo = currentBooks.filter((book) =>{
+      return idBook == book.id
+    })
+    console.log(bookInfo)
   }
 
 
@@ -85,13 +97,14 @@ export function CardBook() {
               <div className="handle-click">
                 <button
                   type="button"
-                // onClick={() => handle(books.id)}
+                  onClick={()=> modalDetails(book.id)}
                 >
                   <span> <BiStar className="iconbutton" />FAVORITOS</span>
                 </button>
+
                 <button
                   type="button"
-                  onClick={() => modalDetails(book.id)} 
+                  onClick={onOpenDescriptionModal}
                 >
                   <span> <AiOutlineInfoCircle className="iconbutton" />  DETALHES </span>
                 </button>

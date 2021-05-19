@@ -10,7 +10,7 @@ import Modal from 'react-modal'
 export function App() {
 
   /*======= */
-  /* MODAL */
+  /* MODAL FAVORITES */
   /*=======*/
   const [isModalFavorites, setIsModalFavorites] = useState(false);
 
