@@ -1,6 +1,8 @@
 import { Container,ContentCard } from "./styles";
 import { BiStar } from 'react-icons/bi';
 import { AiOutlineInfoCircle } from 'react-icons/ai'
+import Modal from 'react-modal'
+import { useState } from "react";
 
 
 
@@ -12,28 +14,43 @@ interface DataInfo {
     description: string,
     publishedDate: string,
     imageLinks: {
-      thumbnail?: string;
+      thumbnail: string;
     },
   }
 }
 
 interface CardBooksProps {
   books: DataInfo[]
-  onOpenDescriptionModal: () => void;
 }
 
 
 
-export function CardBook({ onOpenDescriptionModal, books }: CardBooksProps) {
-// FUNCTION HANDLE MODAL
+export function CardBook({ books }: CardBooksProps) {
+
+  /*======= */
+  /* MODAL DESCRIPTION */
+  /*=======*/
+  const [handleModalDescription, sethandleModalDescription] = useState(false)
+  const [infoModalDescription, setinfoModalDescription] = useState<DataInfo[]>([])
+
+  function handleOpenModalDescription() {
+    sethandleModalDescription(true)
+  }
+
+  function handleCloseModalDescription() {
+    sethandleModalDescription(false)
+  }
+
+// FUNCTION HANDLE MODAL DESCRIPTION
   function modalDetails(idBook:string) {
     const currentBooks = [...books]
     const bookInfo = currentBooks.filter((book) =>{
       return idBook == book.id
     })
-    console.log(bookInfo)
+    // setinfoModalDescription(bookInfo)
+    // console.log(infoModalDescription)      
   }
-
+  console.log(books)
 
   return (
     <Container>
@@ -64,7 +81,7 @@ export function CardBook({ onOpenDescriptionModal, books }: CardBooksProps) {
 
                 <button
                   type="button"
-                  onClick={onOpenDescriptionModal}
+                  onClick={handleOpenModalDescription}
                 >
                   <span> <AiOutlineInfoCircle className="iconbutton" />  DETALHES </span>
                 </button>
@@ -73,6 +90,28 @@ export function CardBook({ onOpenDescriptionModal, books }: CardBooksProps) {
           </ul>
         ))}
       </ContentCard>
+      {/* MODAL */}
+      <Modal
+        isOpen={handleModalDescription}
+        onRequestClose={handleCloseModalDescription}>
+        {infoModalDescription.map(book => (
+          <ul>
+            <li key={book.id}>
+              <strong>
+                Titulo: {book.volumeInfo.title}
+              </strong>
+              <strong>Publicação: </strong>
+              <p>{book.volumeInfo.publishedDate}</p>
+              <div className="description">
+                <p>
+                  <strong>Descrição: </strong>
+                  {book.volumeInfo.description}
+                </p>
+              </div>
+            </li>
+          </ul>
+        ))}
+      </Modal>
     </Container>
   );
 }

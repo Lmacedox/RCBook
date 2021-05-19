@@ -1,7 +1,6 @@
 import { Container, Content } from "./styles";
 import { CardBook } from "../CardBook";
 import { useEffect, useState } from "react";
-import Modal from 'react-modal'
 import { api } from "../../services/api";
 import { FaSearch } from 'react-icons/fa';
 
@@ -40,18 +39,8 @@ export function MainContent(){
     loadBooks();
   }, []);
 
-  /*======= */
-  /* MODAL DESCRIPTION */
-  /*=======*/
-  const [handleModalDescription, sethandleModalDescription] = useState(false)
 
-  function handleOpenModalDescription() {
-    sethandleModalDescription(true)
-  }
 
-  function handleCloseModalDescription() {
-    sethandleModalDescription(false)
-  }
 
     return(
   <Container>
@@ -68,28 +57,8 @@ export function MainContent(){
           <FaSearch className="iconContent" />
         </button>
         </Content>
-        <CardBook onOpenDescriptionModal={handleOpenModalDescription} books={books} />
-        <Modal
-          isOpen={handleModalDescription}
-          onRequestClose={handleCloseModalDescription}>
-          {books.map(book => (
-          <ul>
-            <li>
-              <strong>
-                Titulo: {book.volumeInfo.title}
-              </strong>
-                <strong>Publicação: </strong>
-                <p>{book.volumeInfo.publishedDate}</p>
-                <div className="description">
-                  <p>
-                    <strong>Descrição: </strong>
-                    {book.volumeInfo.description}
-                  </p>
-                </div>
-              </li>
-          </ul>
-          ))}
-        </Modal>
+        <CardBook books={books} />
+        
   </Container>
   )
 }
