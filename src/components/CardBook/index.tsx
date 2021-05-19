@@ -8,7 +8,7 @@ import { FaSearch } from 'react-icons/fa';
 
 
 interface DataInfo  {
-  id: number;
+  id: string;
   volumeInfo: {
     title: string,
     description: string,
@@ -24,10 +24,11 @@ interface DataInfo  {
 export function CardBook() {
   const [searchName, setSearchName] = useState('')
   const [books, setBooks] = useState<DataInfo[]>([]);
+  const [paginationIndex, setPaginationIndex] = useState(0)
 
 // FUNCTION SEARCH BOOK
   async function handleSearchBook(searchName:string) {
-    await api.get(`${searchName}&maxResults=10&key=AIzaSyCl-sNnxcXCUfx8EsqfQEfB9w6kVYqE0ps`)
+    await api.get(`${searchName}&maxResults=9&startIndex=1&key=AIzaSyCl-sNnxcXCUfx8EsqfQEfB9w6kVYqE0ps`)
           .then(response =>
             setBooks(response.data.items)
           )
@@ -36,13 +37,17 @@ export function CardBook() {
 // FUNCTION INITIAL SEARCH
   useEffect(() => {
     async function loadBooks() {
-      await api.get(`${'JavaScript'}&maxResults=10&key=AIzaSyCl-sNnxcXCUfx8EsqfQEfB9w6kVYqE0ps`)
+      await api.get(`${'JavaScript'}&maxResults=9&startIndex=0&key=AIzaSyCl-sNnxcXCUfx8EsqfQEfB9w6kVYqE0ps`)
         .then(response =>
           setBooks(response.data.items)
         )
     }
     loadBooks();
   }, []);
+
+  function modalDetails(idBook:string) {
+    console.log(idBook)
+  }
 
 
   return (
@@ -66,9 +71,8 @@ export function CardBook() {
             <li key={book.id}>
               <img src={book.volumeInfo.imageLinks.thumbnail} />
               <strong>
-                Titulo:
+                Titulo: {book.volumeInfo.title}
               </strong>
-              <p>{book.volumeInfo.title}</p>
               <p>
                 <strong>Publicação: </strong>
                 {book.volumeInfo.publishedDate}</p>
@@ -87,7 +91,7 @@ export function CardBook() {
                 </button>
                 <button
                   type="button"
-                // onClick={() => handle(books.id)}
+                  onClick={() => modalDetails(book.id)} 
                 >
                   <span> <AiOutlineInfoCircle className="iconbutton" />  DETALHES </span>
                 </button>
