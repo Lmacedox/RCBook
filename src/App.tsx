@@ -8,6 +8,9 @@ import { useState } from 'react';
 
 export function App() {
 
+
+
+
   /*======= */
   /* MODAL FAVORITES */
   /*=======*/
@@ -22,18 +25,17 @@ export function App() {
   }
 
 
+
   
 
   return (
-    
     <>
       <Header onOpenFavoritesModal={handleOpenModalFavorites} />
       <MainContent />
       <Modal
         isOpen={isModalFavorites}
         onRequestClose={handleCloseModalFavorites}>
-        
-        <h2>Cadastrar Transação</h2>
+        <h2>Favoritos</h2>
       </Modal>
       <GlobalStyle />
     </>

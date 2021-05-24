@@ -43,8 +43,7 @@ export function CardBook({ books }: CardBooksProps) {
     const bookInfo = currentBooks.filter((book) => {
       return idBook == book.id
     })
-    setinfoModalDescription([...bookInfo])
-    console.log(infoModalDescription)
+
     sethandleModalDescription(true)
   }
 
@@ -55,15 +54,17 @@ export function CardBook({ books }: CardBooksProps) {
 // FUNCTION HANDLE MODAL FAVORITES
   async function handleOpenFavoritesModal(idBook:string) {
     try {
-      const favoriteUpdate = [...books]
-      const existBook = favoriteUpdate.find(book =>  book.id == idBook)
-      localStorage.setItem('@Books:cart', JSON.stringify(existBook))
+      
+      const favoriteUpdate = [...favoritesBook]
+      const existBook = favoriteUpdate.filter(book =>  book.id === idBook)
+      setfavoritesBook(favoriteUpdate)
+      localStorage.setItem('@Books:cart', JSON.stringify(favoritesBook))
     } catch (error) {
       console.log(error)
     } 
       
   }
-console.log(books)
+  
   return (
     <Container>
       <ContentCard className="content-father">

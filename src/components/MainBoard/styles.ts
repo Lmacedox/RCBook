@@ -5,6 +5,40 @@ export const Container = styled.main`
     max-width: 1120px;
     margin: 0 auto;
     padding: 2.5rem 1rem;
+
+
+    @media (max-width: 700px){
+    label{
+      font-size: 0.80rem;
+      }
+      .search-inp{
+        width: 16rem;
+      }
+      .search-button{
+        text-align: center;
+        width: 2rem;
+      }
+    }
+
+    @media (max-width: 760px){
+      .search-inp{
+        width: 18rem;
+      }
+      .search-button{
+        text-align: center;
+        width: 2rem;
+      }
+    }
+
+    @media (max-width: 320px){
+      .search-inp{
+        width:10rem;
+      }
+      .search-button{
+        text-align: center;
+        width: 2rem;
+      }
+    }
 `
 
 export const Content = styled.div`
@@ -53,6 +87,7 @@ export const Content = styled.div`
     .paramsSearch{
       margin: 0 auto;
       text-align: center;
+      display: flex;
     }
 
     .paramsSearch input{

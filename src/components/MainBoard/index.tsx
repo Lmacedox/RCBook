@@ -9,8 +9,7 @@ export function MainContent(){
   const [searchName, setSearchName] = useState('')
   const [paging, setPaging] = useState('1')
   const [maxResults, setmaxResults] = useState('10')
-  console.log(paging)
-  console.log(maxResults)
+
 
   interface DataInfo {
     id: string;
@@ -51,20 +50,20 @@ export function MainContent(){
     return(
   <Container>
     <Content>
-        <input
+        <input className="search-inp"
           placeholder="DIGITE O TITULO DESEJADO"
           value={searchName}
           onChange={event => setSearchName(event.target.value)}
         />
 
-        <button
+          <button className="search-button"
           onClick={() => handleSearchBook(searchName)}
         >
           <FaSearch className="iconContent" />
         </button>
         <div className="paramsSearch">
         <label className="index-pag">Pagina:
-          <input
+          <input className="inp-param"
             value={paging}
             type="number"
               onChange={event => setPaging(event.target.value)}
@@ -72,8 +71,7 @@ export function MainContent(){
         </label>
 
           <label className="index-pag">Maximo de Resultados:
-          <input
-            className="index-pag"
+          <input className="inp-param"
             value={maxResults}
             type="number"
             onChange={event => setmaxResults(event.target.value)}
