@@ -3,6 +3,14 @@ import { darken } from 'polished';
 
 
 export const Container = styled.div`
+  @media (max-width: 700px){
+    .content-father{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+    }
+  }
 
 `
 
@@ -115,4 +123,6 @@ export const ContentModal = styled.div`
     }
 
   }
+
+  
 `

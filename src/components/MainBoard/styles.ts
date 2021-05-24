@@ -50,6 +50,18 @@ export const Content = styled.div`
 			}
     }
 
+    .paramsSearch{
+      margin: 0 auto;
+      text-align: center;
+    }
 
+    .paramsSearch input{
+      margin-top: 1rem;
+      width: 5rem;
+    }
+
+    .paramsSearch > label {
+      margin-right: 3rem;
+    }
 `
 

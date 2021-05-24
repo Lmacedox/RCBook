@@ -66,9 +66,10 @@ export function CardBook({ books }: CardBooksProps) {
 console.log(books)
   return (
     <Container>
-      <ContentCard>
+      <ContentCard className="content-father">
         {books.map(book => (
-          <ul>
+          <div className="main-content">
+          <ul className="ul-card">
             <li key={book.id}>
               <img src={book.volumeInfo.imageLinks.thumbnail} />
               <strong>
@@ -101,6 +102,7 @@ console.log(books)
               </div>
             </li>
           </ul>
+          </div>
         ))}
       </ContentCard>
       {/* MODAL */}

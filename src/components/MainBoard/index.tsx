@@ -7,6 +7,10 @@ import { FaSearch } from 'react-icons/fa';
 export function MainContent(){
   const [books, setBooks] = useState<DataInfo[]>([]);
   const [searchName, setSearchName] = useState('')
+  const [paging, setPaging] = useState('1')
+  const [maxResults, setmaxResults] = useState('10')
+  console.log(paging)
+  console.log(maxResults)
 
   interface DataInfo {
     id: string;
@@ -24,7 +28,7 @@ export function MainContent(){
 
   // FUNCTION SEARCH BOOK
   async function handleSearchBook(searchName: string) {
-    await api.get(`${searchName}&maxResults=9&startIndex=1&key=AIzaSyCl-sNnxcXCUfx8EsqfQEfB9w6kVYqE0ps`)
+    await api.get(`${searchName}&maxResults=${maxResults}&startIndex=${paging}&key=AIzaSyCl-sNnxcXCUfx8EsqfQEfB9w6kVYqE0ps`)
       .then(response =>
         setBooks(response.data.items)
       )
@@ -58,6 +62,24 @@ export function MainContent(){
         >
           <FaSearch className="iconContent" />
         </button>
+        <div className="paramsSearch">
+        <label className="index-pag">Pagina:
+          <input
+            value={paging}
+            type="number"
+              onChange={event => setPaging(event.target.value)}
+          />
+        </label>
+
+          <label className="index-pag">Maximo de Resultados:
+          <input
+            className="index-pag"
+            value={maxResults}
+            type="number"
+            onChange={event => setmaxResults(event.target.value)}
+          />
+          </label>
+        </div>
         </Content>
         <CardBook books={books} />
         
